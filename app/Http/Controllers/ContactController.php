@@ -33,7 +33,7 @@ class ContactController extends Controller
 
         $category = Category::find($validated['category_id']);
 
-        $tags = ! empty($validated['tag_ids'])
+        $tags = !empty($validated['tag_ids'])
             ? Tag::find($validated['tag_ids'])
             : collect();
 
@@ -45,9 +45,10 @@ class ContactController extends Controller
 
         $validated = $storeContactRequest->validated();
         $contact = Contact::create($validated);
+        $tagIds = $validated['tag_ids'];
 
-        if (! empty($validated['tag_ids'])) {
-            $contact->tags()->sync($validated['tag_ids']);
+        if (!empty($validated['tag_ids'])) {
+            $contact->tags()->attach($tagIds);
         }
 
         session()->forget('contact_input');
