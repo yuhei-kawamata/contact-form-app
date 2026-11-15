@@ -41,7 +41,7 @@ class ContactControllerTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
         $tag = Tag::create(['name' => 'テストタグ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
         ])->toArray();
 
@@ -88,7 +88,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'first_name' => str_repeat('あ', 255),
         ])->toArray();
@@ -105,7 +105,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'first_name' => str_repeat('あ', 256),
         ])->toArray();
@@ -140,7 +140,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'last_name' => str_repeat('あ', 255),
         ])->toArray();
@@ -157,7 +157,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'last_name' => str_repeat('あ', 256),
         ])->toArray();
@@ -192,7 +192,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'gender' => random_int(1, 3),
         ])->toArray();
@@ -249,7 +249,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'email' => str_repeat('a', 243).'@example.com',
         ])->toArray();
@@ -266,7 +266,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'email' => str_repeat('a', 244).'@example.com',
         ])->toArray();
@@ -321,7 +321,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'tel' => '0123456789',
         ])->toArray();
@@ -338,7 +338,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'tel' => '01234567890',
         ])->toArray();
@@ -395,7 +395,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'address' => str_repeat('あ', 255),
         ])->toArray();
@@ -412,7 +412,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'address' => str_repeat('あ', 256),
         ])->toArray();
@@ -427,7 +427,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'building' => str_repeat('あ', 255),
         ])->toArray();
@@ -444,7 +444,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'building' => str_repeat('あ', 256),
         ])->toArray();
@@ -511,7 +511,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'detail' => str_repeat('あ', 120),
         ])->toArray();
@@ -528,7 +528,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'detail' => str_repeat('あ', 121),
         ])->toArray();
@@ -543,7 +543,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
         ])->toArray();
 
@@ -591,7 +591,7 @@ class ContactControllerTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
         $tag = Tag::create(['name' => 'テストタグ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
         ])->toArray();
 
@@ -637,7 +637,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'first_name' => str_repeat('あ', 255),
         ])->toArray();
@@ -655,7 +655,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'first_name' => str_repeat('あ', 256),
         ])->toArray();
@@ -690,7 +690,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'last_name' => str_repeat('あ', 255),
         ])->toArray();
@@ -708,7 +708,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'last_name' => str_repeat('あ', 256),
         ])->toArray();
@@ -743,7 +743,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'gender' => random_int(1, 3),
         ])->toArray();
@@ -801,7 +801,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'email' => str_repeat('a', 243).'@example.com',
         ])->toArray();
@@ -819,7 +819,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'email' => str_repeat('a', 244).'@example.com',
         ])->toArray();
@@ -874,7 +874,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'tel' => '0123456789',
         ])->toArray();
@@ -892,7 +892,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'tel' => '01234567890',
         ])->toArray();
@@ -950,7 +950,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'address' => str_repeat('あ', 255),
         ])->toArray();
@@ -968,7 +968,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'address' => str_repeat('あ', 256),
         ])->toArray();
@@ -983,7 +983,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'building' => str_repeat('あ', 255),
         ])->toArray();
@@ -1001,7 +1001,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'building' => str_repeat('あ', 256),
         ])->toArray();
@@ -1068,7 +1068,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'detail' => str_repeat('あ', 120),
         ])->toArray();
@@ -1086,7 +1086,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
             'detail' => str_repeat('あ', 121),
         ])->toArray();
@@ -1101,7 +1101,7 @@ class ContactControllerTest extends TestCase
     {
         $category = Category::create(['content' => 'テストカテゴリ']);
 
-        $contact = Contact::factory()->create([
+        $contact = Contact::factory()->make([
             'category_id' => $category->id,
         ])->toArray();
 
