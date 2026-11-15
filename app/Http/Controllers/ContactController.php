@@ -45,9 +45,10 @@ class ContactController extends Controller
 
         $validated = $storeContactRequest->validated();
         $contact = Contact::create($validated);
+        $tagIds = $validated['tag_ids'];
 
-        if (! empty($validated['tag_ids'])) {
-            $contact->tags()->sync($validated['tag_ids']);
+        if (! empty($tagIds)) {
+            $contact->tags()->attach($tagIds);
         }
 
         session()->forget('contact_input');
