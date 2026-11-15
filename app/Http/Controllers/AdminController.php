@@ -18,7 +18,7 @@ class AdminController extends Controller
         $categoryId = $validated['category_id'] ?? null;
         $date = $validated['date'] ?? null;
 
-        $contacts = Contact::with('category', 'tags')
+        $contacts = Contact::with(['category', 'tags'])
             ->when($keyword, function ($query, $keyword) {
                 return $query->where(function ($q) use ($keyword) {
                     $q->where('first_name', 'like', "%{$keyword}%")
