@@ -20,5 +20,5 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/tags', [TagController::class, 'store'])->name('tags.store');
     Route::get('/tags/{tag}/edit', [TagController::class, 'edit'])->name('tags.edit');
     Route::put('/tags/{tag}', [TagController::class, 'update'])->name('tags.update');
-    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.delete');
+    Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
 });
