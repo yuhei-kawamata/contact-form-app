@@ -33,7 +33,7 @@ class ContactController extends Controller
 
         $category = Category::find($validated['category_id']);
 
-        $tags = !empty($validated['tag_ids'])
+        $tags = ! empty($validated['tag_ids'])
             ? Tag::find($validated['tag_ids'])
             : collect();
 
@@ -47,7 +47,7 @@ class ContactController extends Controller
         $contact = Contact::create($validated);
         $tagIds = $validated['tag_ids'];
 
-        if (!empty($tagIds)) {
+        if (! empty($tagIds)) {
             $contact->tags()->attach($tagIds);
         }
 
