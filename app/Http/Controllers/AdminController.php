@@ -13,10 +13,10 @@ class AdminController extends Controller
     {
         $indexContactRequest->validated();
 
-        $keyword = $validated['keyword'] ?? null;
-        $gender = $validated['gender'] ?? null;
-        $categoryId = $validated['category_id'] ?? null;
-        $date = $validated['date'] ?? null;
+        $keyword = $indexContactRequest->input('keyword');
+        $gender = $indexContactRequest->input('gender');
+        $categoryId = $indexContactRequest->input('category_id');
+        $date = $indexContactRequest->input('date');
 
         $contacts = Contact::with(['category', 'tags'])
             ->when($keyword, function ($query, $keyword) {
