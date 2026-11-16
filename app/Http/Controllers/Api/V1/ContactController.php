@@ -55,7 +55,7 @@ class ContactController extends Controller
     {
         $validated = $storeContactRequest->validated();
         $contact = Contact::create($validated);
-        $tagIds = $validated['tag_ids'];
+        $tagIds = $validated['tag_ids'] ?? [];
 
         if (! empty($tagIds)) {
             $contact->tags()->attach($tagIds);
