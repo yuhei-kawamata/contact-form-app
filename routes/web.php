@@ -22,6 +22,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
 });
 
-Route::middleware('auth')->name('admin')->group(function () {
+Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/contacts/export', [ContactController::class, 'export'])->name('contacts.export');
 });
