@@ -36,7 +36,7 @@ class ContactController extends Controller
 
         $category = Category::find($validated['category_id']);
 
-        $tags = ! empty($validated['tag_ids'])
+        $tags = !empty($validated['tag_ids'])
             ? Tag::find($validated['tag_ids'])
             : collect();
 
@@ -50,7 +50,7 @@ class ContactController extends Controller
         $contact = Contact::create($validated);
         $tagIds = $validated['tag_ids'] ?? [];
 
-        if (! empty($tagIds)) {
+        if (!empty($tagIds)) {
             $contact->tags()->attach($tagIds);
         }
 
@@ -93,7 +93,7 @@ class ContactController extends Controller
             ->latest();
 
         $now = Carbon::now();
-        $filename = 'ユーザー一覧（全件：'.$now->format('Y年m月d日').'）.csv';
+        $filename = "検索結果一覧（" . $now->format('Y年m月d日') . "）.csv";
 
         return Response::streamDownload(function () use ($query) {
             $stream = fopen('php://output', 'w');
@@ -119,7 +119,7 @@ class ContactController extends Controller
                 foreach ($contacts as $contact) {
                     $row = [
                         $contact->id,
-                        $contact->first_name.$contact->last_name,
+                        $contact->first_name . $contact->last_name,
                         $contact->gender_label,
                         $contact->email,
                         $contact->tel,
