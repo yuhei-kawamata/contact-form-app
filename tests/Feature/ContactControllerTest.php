@@ -1222,7 +1222,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function 未認証ユーザーが_cs_vファイルをダウンロードしようとすると、ログイン画面にリダイレクトされる(): void
+    public function 未認証ユーザーがファイルをダウンロードしようとすると、ログイン画面にリダイレクトされる(): void
     {
         $response = $this->get(route('admin.contacts.export'));
 
@@ -1236,7 +1236,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function 認証済みユーザーは_cs_vデータをダウンロードできる(): void
+    public function 認証済みユーザーはデータをダウンロードできる(): void
     {
         $fixedNow = Carbon::create(2026, 11, 17, 15, 30, 0);
         Carbon::setTestNow($fixedNow);
@@ -1293,7 +1293,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function 検索項目を指定しない場合、お問い合わせが新着順で含まれた_cs_vファイルが出力される(): void
+    public function 検索項目を指定しない場合、お問い合わせが新着順で含まれたファイルが出力される(): void
     {
         $user = User::factory()->create();
         $category = Category::create(['content' => 'テストカテゴリ']);
@@ -1352,7 +1352,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function keywordで_cs_vファイルに含まれる内容をフィルタできる(): void
+    public function keywordでファイルに含まれる内容をフィルタできる(): void
     {
         $user = User::factory()->create();
         $category = Category::create(['content' => 'テストカテゴリ']);
@@ -1399,7 +1399,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function genderで_cs_vファイルに含まれる内容をフィルタできる(): void
+    public function genderでファイルに含まれる内容をフィルタできる(): void
     {
         $user = User::factory()->create();
         $category = Category::create(['content' => 'テストカテゴリ']);
@@ -1446,7 +1446,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function category_idで_cs_vファイルに含まれる内容をフィルタできる(): void
+    public function category_idでファイルに含まれる内容をフィルタできる(): void
     {
         $user = User::factory()->create();
         $category1 = Category::create(['content' => 'テストカテゴリ']);
@@ -1492,7 +1492,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function dateで_cs_vファイルに含まれる内容をフィルタできる(): void
+    public function dateでファイルに含まれる内容をフィルタできる(): void
     {
         $user = User::factory()->create();
         $category = Category::create(['content' => 'テストカテゴリ']);
@@ -1539,7 +1539,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function keywordを文字列以外で指定して_cs_vファイルを出力しようとするとバリデーションエラーが出る(): void
+    public function keywordを文字列以外で指定してファイルを出力しようとするとバリデーションエラーが出る(): void
     {
         $user = User::factory()->create();
         $params = ['keyword' => ['invalid']];
@@ -1550,7 +1550,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function keywordが255文字以下であれば_cs_vファイルを出力できる(): void
+    public function keywordが255文字以下であればファイルを出力できる(): void
     {
         $user = User::factory()->create();
         $category = Category::create(['content' => 'テストカテゴリ']);
@@ -1595,7 +1595,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function keywordが256文字だと_cs_vファイルを出力しようとしたときにバリデーションエラーが起きる(): void
+    public function keywordが256文字だとファイルを出力しようとしたときにバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         $params = ['keyword' => str_repeat('あ', 256)];
@@ -1606,7 +1606,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function genderが整数でないと_cs_vファイルを出力しようとしたときにバリデーションエラーが起きる(): void
+    public function genderが整数でないとファイルを出力しようとしたときにバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         $params = ['gender' => ['invalid']];
@@ -1617,7 +1617,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function genderが0だと性別問わずすべてのお問い合わせが_cs_vファイルに含まれる(): void
+    public function genderが0だと性別問わずすべてのお問い合わせがファイルに含まれる(): void
     {
         $user = User::factory()->create();
         $category = Category::create(['content' => 'テストカテゴリ']);
@@ -1698,7 +1698,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function genderが0未満の整数だと_cs_vファイルを出力しようとしたときにバリデーションエラーが起きる(): void
+    public function genderが0未満の整数だとファイルを出力しようとしたときにバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         $params = ['gender' => -1];
@@ -1709,7 +1709,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function genderが4以上の整数だと_cs_vファイルを出力しようとしたときにバリデーションエラーが起きる(): void
+    public function genderが4以上の整数だとファイルを出力しようとしたときにバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         $params = ['gender' => 4];
@@ -1720,7 +1720,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function category_idが整数でないと_cs_vファイルを出力しようとしたときにバリデーションエラーが起きる(): void
+    public function category_idが整数でないとファイルを出力しようとしたときにバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         $params = ['category_id' => ['invalid']];
@@ -1731,7 +1731,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function categoriesテーブルに存在しないcategory_idを指定して_cs_vファイルを出力しようとするとバリデーションエラーが起きる(): void
+    public function categoriesテーブルに存在しないcategory_idを指定してファイルを出力しようとするとバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         Category::create(['content' => 'テストカテゴリ']);
@@ -1744,7 +1744,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function dateが日付形式でないと_cs_vファイルを出力しようとしたときにバリデーションエラーが起きる(): void
+    public function dateが日付形式でないとファイルを出力しようとしたときにバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
         $params = ['date' => ['invalid']];
@@ -1755,7 +1755,7 @@ class ContactControllerTest extends TestCase
     }
 
     /** @test */
-    public function お問い合わせが0件の場合、ヘッダー行のみの_cs_vファイルが出力される(): void
+    public function お問い合わせが0件の場合、ヘッダー行のみのファイルが出力される(): void
     {
         $user = User::factory()->create();
 
