@@ -19,8 +19,20 @@ class TagControllerTest extends TestCase
 
         $response = $this->actingAs($user)->get(route('admin.tags.edit', $tag->id));
 
+        $response->assertStatus(200);
         $response->assertViewIs('admin.tags.edit');
         $response->assertViewHas('tag');
+    }
+
+    /** @test */
+    public function 存在しないタグの編集画面にアクセスしようとすると404エラーが返る(): void
+    {
+        $user = User::factory()->create();
+        $tag = Tag::create(['name' => 'テストタグ']);
+
+        $response = $this->actingAs($user)->get(route('admin.tags.edit', 999));
+
+        $response->assertStatus(404);
     }
 
     /** @test */
@@ -58,6 +70,22 @@ class TagControllerTest extends TestCase
     }
 
     /** @test */
+    public function 存在しないタグを更新しようとすると404エラーが返る(): void
+    {
+        $user = User::factory()->create();
+        $tag = Tag::create(['name' => 'テストタグ']);
+        $data = ['name' => '更新後のタグ'];
+
+        $response = $this->actingAs($user)->put(route('admin.tags.update', 999), $data);
+
+        $response->assertStatus(404);
+        $this->assertDatabaseHas('tags', [
+            'id' => $tag->id,
+            'name' => 'テストタグ',
+        ]);
+    }
+
+    /** @test */
     public function 既存のタグを削除できる(): void
     {
         $user = User::factory()->create();
@@ -67,6 +95,21 @@ class TagControllerTest extends TestCase
 
         $response->assertRedirect(route('admin.contacts.index'));
         $this->assertDatabaseMissing('tags', [
+            'id' => $tag->id,
+            'name' => 'テストタグ',
+        ]);
+    }
+
+    /** @test */
+    public function 存在しないタグを削除しようとすると404エラーが返る(): void
+    {
+        $user = User::factory()->create();
+        $tag = Tag::create(['name' => 'テストタグ']);
+
+        $response = $this->actingAs($user)->delete(route('admin.tags.destroy', 999));
+
+        $response->assertStatus(404);
+        $this->assertDatabaseHas('tags', [
             'id' => $tag->id,
             'name' => 'テストタグ',
         ]);
@@ -165,9 +208,6 @@ class TagControllerTest extends TestCase
         $this->assertDatabaseHas('tags', [
             'name' => 'テストタグ',
         ]);
-        $this->assertDatabaseMissing('tags', [
-            'name' => ['invalid'],
-        ]);
     }
 
     /** @test */
@@ -241,9 +281,7 @@ class TagControllerTest extends TestCase
         $response = $this->actingAs($user)->post(route('admin.tags.store'), $data);
 
         $response->assertSessionHasErrors('name');
-        $this->assertDatabaseHas('tags', [
-            'name' => 'テストタグ',
-        ]);
+        $this->assertDatabaseCount('tags', 1);
     }
 
     /** @test */

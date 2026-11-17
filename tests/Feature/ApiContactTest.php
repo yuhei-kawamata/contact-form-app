@@ -1263,6 +1263,7 @@ class ApiContactTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['first_name']);
         $this->assertDatabaseHas('contacts', [
+            'id' => $contact->id,
             'first_name' => $contact->first_name,
         ]);
     }

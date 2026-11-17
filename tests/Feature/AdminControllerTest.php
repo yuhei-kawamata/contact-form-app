@@ -85,11 +85,11 @@ class AdminControllerTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
 
         Contact::factory()->create([
-            'gender' => '1',
+            'gender' => 1,
             'category_id' => $category->id,
         ]);
         Contact::factory()->create([
-            'gender' => '2',
+            'gender' => 2,
             'category_id' => $category->id,
         ]);
 
@@ -103,7 +103,7 @@ class AdminControllerTest extends TestCase
     }
 
     /** @test */
-    public function 管理ダッシュボードでcategor_idでフィルタができる(): void
+    public function 管理ダッシュボードでcategory_idでフィルタができる(): void
     {
         $user = User::factory()->create();
         $category1 = Category::create(['content' => 'テスト1']);
@@ -214,6 +214,7 @@ class AdminControllerTest extends TestCase
         });
     }
 
+    /** @test */
     public function 文字数が256文字以上だとkeywordでフィルタした際にバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();
@@ -242,11 +243,11 @@ class AdminControllerTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
 
         Contact::factory()->create([
-            'gender' => '1',
+            'gender' => 1,
             'category_id' => $category->id,
         ]);
         Contact::factory()->create([
-            'gender' => '2',
+            'gender' => 2,
             'category_id' => $category->id,
         ]);
 
@@ -265,11 +266,11 @@ class AdminControllerTest extends TestCase
         $category = Category::create(['content' => 'テストカテゴリ']);
 
         Contact::factory()->create([
-            'gender' => '1',
+            'gender' => 1,
             'category_id' => $category->id,
         ]);
         Contact::factory()->create([
-            'gender' => '3',
+            'gender' => 3,
             'category_id' => $category->id,
         ]);
 
@@ -293,6 +294,7 @@ class AdminControllerTest extends TestCase
         $response->assertSessionHasErrors('gender');
     }
 
+    /** @test */
     public function genderに4以上の整数を指定して検索するとバリデーションエラーが起きる(): void
     {
         $user = User::factory()->create();

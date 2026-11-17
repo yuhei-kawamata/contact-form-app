@@ -93,7 +93,7 @@ class ContactController extends Controller
             ->latest();
 
         $now = Carbon::now();
-        $filename = 'ユーザー一覧（全件：'.$now->format('Y年m月d日').'）.csv';
+        $filename = '検索結果一覧（'.$now->format('Y年m月d日').'）.csv';
 
         return Response::streamDownload(function () use ($query) {
             $stream = fopen('php://output', 'w');
