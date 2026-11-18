@@ -1,66 +1,243 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# COACHTECH お問い合わせフォーム
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 概要
 
-## About Laravel
+COACHTECH 「基礎学習ターム 確認テスト お問い合わせフォーム」で作成した成果物です。
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 公開されているお問い合わせフォームから、誰でもお問い合わせを送信できます。
+- 管理者は、管理者専用ページにログインした上で、お問い合わせ内容の確認・管理することができます。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- 実装機能
+    - お問い合わせ送信用フォーム（送信内容の確認画面あり）
+    - 管理者用機能
+        - 管理者新規登録・ログイン・ログアウト
+        - お問い合わせ一覧表示（検索機能・ページネーション付き）
+        - お問い合わせの一括データ出力（BOM付きCSV）
+        - お問い合わせ詳細確認
+        - お問い合わせ削除
+        - お問い合わせに紐づけるタグの一覧表示
+        - タグ内容編集
+        - タグ削除
+    - 公開API
+        - お問い合わせ一覧（検索・ページネーション付き）
+        - お問い合わせ詳細（カテゴリ・タグ含む）
+        - お問い合わせ新規作成
+        - お問い合わせ更新
+        - お問い合わせ削除
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ER図
 
-## Learning Laravel
+```mermaid
+erDiagram
+    categories ||--o{ contacts : "分類する"
+    contacts ||--o{ contact_tag : "紐づく"
+    tags ||--o{ contact_tag : "紐づく"
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    users {
+        bigint id PK "ユーザーID"
+        string name "ユーザー名"
+        string email UK "メールアドレス"
+        timestamp email_verified_at "メール認証日時(NULL許可)"
+        string password "パスワード"
+        string remember_token "ログイン維持トークン(NULL許可)"
+    }
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+    categories {
+        bigint id PK "カテゴリーID"
+        string content "内容"
+    }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    contacts {
+        bigint id PK "お問い合わせID"
+        bigint category_id FK "カテゴリーID"
+        string first_name "名"
+        string last_name "姓"
+        integer gender "性別"
+        string email "メールアドレス"
+        string tel "電話番号(10～11桁)"
+        string address "住所"
+        string building "建物名(NULL許可)"
+        string detail "内容(120文字)"
+        timestamp created_at "作成日時"
+    }
 
-## Laravel Sponsors
+    tags {
+        bigint id PK "タグID"
+        string name UK "タグ名(50文字)"
+    }
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    contact_tag {
+        bigint id PK "中間テーブルID"
+        bigint contact_id FK,UK "お問い合わせID (UNIQUE: contact_id, tag_id)"
+        bigint tag_id FK,UK "タグID (UNIQUE: contact_id, tag_id)"
+    }
+```
 
-### Premium Partners
+## 環境構築手順
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    - Docker Desktop（またはDocker Engine）が起動していることを確認してください。
+    - （Windowsの方へ）以下のコマンドは WSL（Ubuntu）のターミナルで実行してください（PowerShellでは動きません）。
 
-## Contributing
+- STEP1：リポジトリのクローン
+    - ターミナルを開き、任意の場所にリポジトリをクローンします。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+        ```
+        # 任意のディレクトリに移動
+        cd ~
 
-## Code of Conduct
+        # リポジトリのクローンを作成
+        git clone https://github.com/yuhei-kawamata/contact-form-app.git
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+        # 作業用フォルダへ移動
+        cd contact-form-app
+        ```
 
-## Security Vulnerabilities
+- STEP2: 環境変数ファイル（.env）の作成
+    - .env.exampleファイルをコピーして.envファイルを作成してください。
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+        ```
+        # .envファイルの作成
+        cp .env.example .env
+        ```
 
-## License
+    - .envファイルを開き、データベース接続情報が以下と一致していることを確認します。
+    - > 重要: DB_HOST は localhost や 127.0.0.1 ではなく、Dockerコンテナ名である mysql を指定します。
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        ```
+        # .envファイルのデータベース情報が以下に書き換える
+        DB_CONNECTION=mysql
+        DB_HOST=mysql
+        DB_PORT=3306
+        DB_DATABASE=laravel
+        DB_USERNAME=sail
+        DB_PASSWORD=password
+        ```
+
+- STEP3：Composer依存関係のインストール（コンテナを使用）
+    - Dockerコンテナ経由でPHPの依存パッケージをインストールします。
+
+        ```
+        docker run --rm \
+        -u "$(id -u):$(id -g)" \
+        -v "$(pwd):/var/www/html" \
+        -w /var/www/html \
+        -e COMPOSER_CACHE_DIR=/tmp/composer_cache \
+        laravelsail/php82-composer:latest \
+        composer install
+        ```
+
+    - M1/M2/M3 Mac（Apple Silicon）をお使いの方
+        - Apple Silicon搭載のMacでは、`sail up -d`実行時に以下のエラーが発生することがあります：
+
+            ```
+            no matching manifest for linux/arm64/v8
+            ```
+
+        - 解決方法: `compose.yaml`を開き、mysqlサービスに`platform: 'linux/amd64'`を追加してください。
+            ```
+            mysql:
+            image: 'mysql/mysql-server:8.0'
+            platform: 'linux/amd64'  # ← この行を追加
+            ports:
+            ```
+
+- STEP4：Sailの起動とエイリアス設定
+    - プロジェクトのルートディレクトリ（contact-form-app）で下記コマンドを実行してください。
+
+        ```
+        # Sailをバックグラウンドで起動（初回はイメージのダウンロードに数分かかることがあります）
+        ./vendor/bin/sail up -d
+
+        # エイリアスを設定して 'sail' だけでコマンドを実行できるようにする（任意）
+        echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.zshrc
+
+        # または bash の場合
+        # echo "alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'" >> ~/.bashrc
+
+        # シェルを再起動するか、新しいターミナルを開いてエイリアスを有効にする
+        exec $SHELL
+        ```
+
+- STEP5：アプリケーションキーの生成
+    - プロジェクトのルートディレクトリ（contact-form-app）で下記コマンドを実行してください。
+        ```
+        sail artisan key:generate
+        ```
+
+- STEP6: データベースのマイグレーションと初期データ投入
+
+    ```
+    以下のコマンドでテーブルを作成し、初期データを投入します。
+    sail artisan migrate --seed
+
+    ※既存のデータベースをリセットしたい場合は以下を実行してください。
+    sail artisan migrate:fresh --seed
+    ```
+
+- STEP7：フロントエンドのセットアップ (Vite & Tailwind CSS)
+    - 本プロジェクトでは、フロントエンドのスタイリングにTailwind CSSを使用します。
+    1. NPM依存パッケージのインストール
+
+        > 重要: sail npm install を実行する前に、必ずSailコンテナが起動していることを確認してください。
+
+        ```
+        sail npm install
+        ```
+
+    2. Vite開発サーバーの起動
+
+        > 注意: sail npm run dev は、別のターミナル等で実行したままにしておく必要があります。
+
+        ```
+        sail npm run dev
+        ```
+
+- STEP8: ブラウザでの確認
+    - http://localhostにアクセスして、画面が表示されることを確認してください。
+
+## 使用技術
+
+- PHP : 8.2
+- Laravel : 10.x
+- DB : MySQL 8.0
+- Webサーバー : Nginx
+- フロントエンド : Vite, Tailwind CSS ^3.4.0
+- 開発ツール : Docker, Laravel Sail, phpMyAdmin
+- Blade テンプレート
+- セキュリティ関連対策
+    - CSRF 保護（`@csrf`）
+    - XSS 対策（Blade の自動エスケープ）
+    - パスワードのHash化
+    - SQLインジェクション対策
+    - セッションハイジャック対策
+- migration、seeder、factory
+- Eloquent ORM（hasMany / belongsTo / belongsToMany）
+- FormRequest（バリデーション）
+- Laravel Fortify（ユーザー登録、ログイン、ログアウト機能）
+- PHPUnit（テスト）
+- REST API (JSON、CRUD)
+- API Resources、FormRequest（バリデーション）
+- Postman(APIの動作確認)
+- BOM付CSVデータダウンロード（検索条件に応じた内容出力、Excelでの文字化けを防ぐためのBOM）
+
+## APIエンドポイント一覧
+
+| HTTPメソッド | URI                        | 説明                                           | 認証 |
+| ------------ | -------------------------- | ---------------------------------------------- | ---- |
+| GET          | /api/v1/contacts           | お問い合わせ一覧（検索・ページネーション付き） | 不要 |
+| GET          | /api/v1/contacts/{contact} | お問い合わせ詳細（カテゴリ・タグ含む）         | 不要 |
+| POST         | /api/v1/contacts           | お問い合わせ新規作成                           | 不要 |
+| PUT          | /api/v1/contacts/{contact} | お問い合わせ更新                               | 不要 |
+| DELETE       | /api/v1/contacts/{contact} | お問い合わせ削除                               | 不要 |
+
+## 開発環境URL
+
+http://localhost
+
+## 作成者
+
+川又　悠平
+
+```
+
+```
