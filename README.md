@@ -104,7 +104,7 @@ erDiagram
     - > 重要: DB_HOST は localhost や 127.0.0.1 ではなく、Dockerコンテナ名である mysql を指定します。
 
         ```
-        # .envファイルのデータベース情報が以下に書き換える
+        # .envファイルのデータベース情報を以下に書き換える
         DB_CONNECTION=mysql
         DB_HOST=mysql
         DB_PORT=3306
