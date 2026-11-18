@@ -75,8 +75,8 @@ erDiagram
 
 ## 環境構築手順
 
-    - Docker Desktop（またはDocker Engine）が起動していることを確認してください。
-    - （Windowsの方へ）以下のコマンドは WSL（Ubuntu）のターミナルで実行してください（PowerShellでは動きません）。
+- Docker Desktop（またはDocker Engine）が起動していることを確認してください。
+- （Windowsの方へ）以下のコマンドは WSL（Ubuntu）のターミナルで実行してください（PowerShellでは動きません）。
 
 - STEP1：リポジトリのクローン
     - ターミナルを開き、任意の場所にリポジトリをクローンします。
@@ -237,7 +237,3 @@ http://localhost
 ## 作成者
 
 川又　悠平
-
-```
-
-```
