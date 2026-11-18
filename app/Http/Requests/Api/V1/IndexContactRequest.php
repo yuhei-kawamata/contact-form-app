@@ -18,8 +18,8 @@ class IndexContactRequest extends FormRequest
             'gender' => 'nullable|integer|in:1,2,3',
             'category_id' => 'nullable|integer|exists:categories,id',
             'date' => 'nullable|date',
-            'page' => 'nullable|integer|min:1',
             'per_page' => 'nullable|integer|min:1|max:100',
+            'page' => 'nullable|integer|min:1',
         ];
     }
 

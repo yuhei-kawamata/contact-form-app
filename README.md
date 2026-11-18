@@ -44,7 +44,7 @@ erDiagram
 
     categories {
         bigint id PK "カテゴリーID"
-        string content "内容"
+        string content "種類"
     }
 
     contacts {
