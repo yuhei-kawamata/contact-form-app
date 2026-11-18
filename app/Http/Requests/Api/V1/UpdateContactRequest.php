@@ -41,6 +41,7 @@ class UpdateContactRequest extends FormRequest
             'category_id.required' => 'お問い合わせの種類を選択してください',
             'detail.required' => 'お問い合わせ内容を入力してください',
             'detail.max' => 'お問い合わせ内容は120文字以内で入力してください',
+            'tel.string' => '電話番号はハイフンなしの10〜11桁で入力してください',
             'tel.regex' => '電話番号はハイフンなしの10〜11桁で入力してください',
             'gender.integer' => '性別の値が不正です',
             'gender.in' => '性別の値が不正です',
